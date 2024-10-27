@@ -136,39 +136,39 @@ There are two things worth noting:
   1. Because the question asks for solving the social planner's problem, I'm tempted to say yes. In that case, one just replaces the $g$ in the value function with $\tau w l$, and agents will take it into account in their FOCs.
   2. If no, one solves the Bellan equation as if it is without this term $\log g$, since it does not induce any changes to decisions. Then, with the solved policy $l^{\star}$ at each grid point, we substitute in $g=\tau e^z(1-\alpha) k^{\alpha} (l^{\star})^{1-\alpha}$ to the value function.
 
-Again, because the question goes after the **associated social planner's problem**, I will solve the problem in the first case. As a result, 
+I will solve the problem **assuming the second case**, because it is more natural and consistent with a market equilibrium. As a result, 
 the problem becomes: 
 $$
 \begin{align*}
-    V\left(k,{\color{red}i};\tau,z\right)&=\max_{c,l,{\color{red}i'}}\;\log c+\eta\log\left(\tau(1-\alpha)e^{z}k^{\alpha}l^{1-\alpha}\right)-\frac{l^{2}}{2}+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V\left(k',{\color{red}i'};\tau',z'\right)\right]\\\text{s.t. }&c+i'=\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{1-\alpha}\\&k'=\delta k+\left(1-\phi\left({\color{red}\frac{i'}{i}}-1\right)^{2}\right)i'
+    V\left(k,{\color{red}i};\tau,z\right)&=\max_{c,l,{\color{red}i'}}\;\log c+\eta\log(g)-\frac{l^{2}}{2}+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V\left(k',{\color{red}i'};\tau',z'\right)\right]\\\text{s.t. }&c+i'=\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{1-\alpha}\\&k'=(1-\delta) k+\left(1-\phi\left({\color{red}\frac{i'}{i}}-1\right)^{2}\right)i'
 \end{align*}
 $$
-where I relabeled parameter values using parameter notations for generality. 
+where $g = \left(\tau(1-\alpha)e^{z}k^{\alpha}l^{1-\alpha}\right)$, and I relabeled parameter values using parameter notations for generality. 
 
 ### 6.2 Steady state 
 We can write the Lagrangian: 
 $$
 \begin{align*}
-    \mathcal{L}=&\log c+\eta\log\left(\tau(1-\alpha)e^{z}k^{\alpha}l^{1-\alpha}\right)-\frac{l^{2}}{2}+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V\left(k',{\color{red}i'};\tau',z'\right)\right]\\&+\lambda\left\{ \left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{1-\alpha}-c-i'\right\} 
+    \mathcal{L}=&\log c+\eta\log(g)-\frac{l^{2}}{2}+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V\left(k',{\color{red}i'};\tau',z'\right)\right]\\&+\lambda\left\{ \left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{1-\alpha}-c-i'\right\} 
 \end{align*}
 $$
 This gives the first-order conditions: 
 $$
 \begin{align*}
-    \frac{1}{c}&=\lambda\\{\color{orange}\eta(1-\alpha)\frac{1}{l}}&=l-\lambda\left[(1-\tau)(1-\alpha)+\alpha\right](1-\alpha)e^{z}k^{\alpha}l^{-\alpha}\\\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V_{i}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)+V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)\frac{\partial k'}{\partial i'}\right]&=\lambda
+    \frac{1}{c}&=\lambda\\l&=\lambda\left[(1-\tau)(1-\alpha)+\alpha\right](1-\alpha)e^{z}k^{\alpha}l^{-\alpha}\\\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V_{i}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)+V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)\frac{\partial k'}{\partial i'}\right]&=\lambda
 \end{align*}
 $$
 where $$\frac{\partial k'}{\partial i'}=1-\phi\left({\color{red}\frac{i'}{i}}-1\right)^{2}+2\phi\frac{i'}{i}\left({\color{red}\frac{i'}{i}}-1\right)$$
 And the envelop conditions: 
 $$
 \begin{align*}
-    V_{i}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)&=\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)\frac{\partial k'}{\partial i}\right]\\V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)&=\eta\alpha\frac{1}{k}+\lambda\left[(1-\tau)(1-\alpha)+\alpha\right]\alpha e^{z}k^{\alpha-1}l^{1-\alpha}\\&+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)\right]\cdot\delta
+    V_{i}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)&=\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)\frac{\partial k'}{\partial i}\right]\\V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)&=\lambda\left[(1-\tau)(1-\alpha)+\alpha\right]\alpha e^{z}k^{\alpha-1}l^{1-\alpha}\\&+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V_{k}^{\prime}\left(k',{\color{red}i'};\tau',z'\right)\right]\cdot\delta
 \end{align*}
 $$
 where $$\frac{\partial k'}{\partial i}=-2\phi\left({\color{red}\frac{i'}{i}}-1\right)\left(\frac{i'}{i}\right)^{2}$$
 
 In the steady state, we have
-$$V_{k}^{\prime}\left(k',{\color{red}i'};\bar{\tau},\bar{z}\right)=\frac{1}{1-\beta\delta}\left\{ \eta\alpha\frac{1}{k}+\lambda\left[(1-\tau)(1-\alpha)+\alpha\right]\alpha e^{z}k^{\alpha-1}l^{1-\alpha}\right\} $$
+$$V_{k}^{\prime}\left(k',{\color{red}i'};\bar{\tau},\bar{z}\right)=\frac{1}{1-\beta\delta}\lambda\left[(1-\tau)(1-\alpha)+\alpha\right]y$$
 $$V_{i}^{\prime}\left(k',{\color{red}i'};\bar{\tau},\bar{z}\right)=-\beta V_{k}^{\prime}\left(k',{\color{red}i'};\bar{\tau},\bar{z}\right)\cdot2\phi\left({\color{red}\frac{i'}{i}}-1\right)\left(\frac{i'}{i}\right)^{2}$$
 Then, we can solve for the steady-state variable values using the first-order conditions numerically.
 In particular, in the steady state, $$V_{i}^{\prime}\left(\bar{k},\bar{i};\bar{\tau},\bar{z}\right)=0$$
@@ -176,27 +176,81 @@ In particular, in the steady state, $$V_{i}^{\prime}\left(\bar{k},\bar{i};\bar{\
 As a result, the steady state is characterized by the following equations: 
 $$
 \begin{align*}
-    (1-\delta)k&=i\\\eta(1-\alpha)\frac{1}{l}&=l-\frac{1}{c}\left[(1-\tau)(1-\alpha)+\alpha\right](1-\alpha)y\\c+i&=\left[(1-\tau)(1-\alpha)+\alpha\right]y\\\frac{1}{c}&=\beta\left(\eta\alpha\frac{1}{k}+\frac{1}{c}\left[(1-\tau)(1-\alpha)+\alpha\right]\alpha y\right)
+    i&=\delta k\\l&=\frac{1}{c}\left[(1-\tau)(1-\alpha)+\alpha\right](1-\alpha)y\\c+i&=\left[(1-\tau)(1-\alpha)+\alpha\right]y\\\frac{1}{c}&=\beta\frac{1}{c}\left[(1-\tau)(1-\alpha)+\alpha\right]\alpha y\\g&=\tau(1-\alpha)y
 \end{align*} 
 $$
 
 Let us solve it in Matlab. 
+
+
+
+
+
+
+
 
 ### 6.3 Value function iteration with a fixed grid
 
 To solve the problem using Value Function Iteration, we can rescale the value function $\tilde{V} = (1-\beta) V$, and write the problem as: 
 $$
 \begin{align*}
-    \tilde{V}\left(k,{\color{red}i};\tau,z\right)&=\max_{c,l}\;(1-\beta)\left[\log c+\eta\log\left(\tau(1-\alpha)e^{z}k^{\alpha}l^{1-\alpha}\right)-\frac{l^{2}}{2}\right]+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[\tilde{V}\left(k',{\color{red}i'};\tau',z'\right)\right]\\\text{s.t. }&i'=\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{1-\alpha}-c\\&k'=\delta k+\left(1-\phi\left({\color{red}\frac{i'}{i}}-1\right)^{2}\right)i'
+    \tilde{V}\left(k,{\color{red}i};\tau,z\right)&=\max_{c,l}\;(1-\beta)\left[\log c+\eta\log\left(g\right)-\frac{l^{2}}{2}\right]+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[\tilde{V}\left(k',{\color{red}i'};\tau',z'\right)\right]\\\text{s.t. }&i'=\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{1-\alpha}-c\\&k'=(1-\delta)k+\left(1-\phi\left({\color{red}\frac{i'}{i}}-1\right)^{2}\right)i'
 \end{align*}
 $$ 
 
+However, notice that the labor decision is a static problem given the state variable, with FOC: $$l=(1-\alpha)\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{-\alpha}$$which implies optimal labor: $$l^{*}=\left((1-\alpha)\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}\right)^{\frac{1}{1+\alpha}}$$
+
+Thus, the problem becomes one that only involves a single choice variable: 
+$$
+\begin{align*}
+    \tilde{V}\left(k,{\color{red}i};\tau,z\right)&=\max_{c}\;(1-\beta)\left[\log c+\eta\log\left(g\right)-\frac{l^{*2}}{2}\right]+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[\tilde{V}\left(k',{\color{red}i'};\tau',z'\right)\right]\\\text{s.t. }&c=\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}l^{*1-\alpha}-i'\\&k'=(1-\delta)k+\left(1-\phi\left({\color{red}\frac{i'}{i}}-1\right)^{2}\right)i'
+\end{align*}
+$$
+
+
+
+
+
+
+
+
+
 ### 6.4 Value function iteration with an endogenous grid
 
+To solve the problem using the generalized Endogenous Grid method following Barillas and Fernandez-Villaverde (2006), we follow the two steps:
+1. Solve the VFI while fixing $l = \bar{l}$ using the endogenous grid method.
+2. Solve the original VFI from the solution of step 1 as an initial guess.
+
+To reformulate the problem, we define a new state variable $$Y=\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}\bar{l}^{1-\alpha}$$
+
+The recasted problem is 
+$$
+\begin{align*}
+    \tilde{V}\left(Y,{\color{red}i};\tau,z\right)&=\max_{i',l}\;(1-\beta)\left[\log\left(Y-i'\right)+\eta\log\left(g\right)-\frac{\bar{l}^{2}}{2}\right]+\beta\mathbb{E}_{\tau',z'\vert\tau,z}\left[V\left(Y',{\color{red}i'};\tau',z'\right)\right]\\\text{where }&Y'=\left[(1-\tau')(1-\alpha)+\alpha\right]e^{z'}k'^{\alpha}\bar{l}^{1-\alpha}\\&k'=(1-\delta)\left(\frac{Y}{\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}}\right)^{1/\alpha}\bar{l}^{\frac{\alpha-1}{\alpha}}+\left(1-\phi\left({\color{red}\frac{i'}{i}}-1\right)^{2}\right)i'
+\end{align*}
+$$
+where we used the inversion: $$Y=\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}k^{\alpha}\bar{l}^{1-\alpha}\iff k=\left(\frac{Y}{\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}}\right)^{1/\alpha}\bar{l}^{\frac{\alpha-1}{\alpha}}$$
+
+Now, define $$\hat{V}(Y,{\color{red}i'},\tau,z)\equiv\mathbb{E}_{\tau',z'\vert\tau,z}\left[\tilde{V}\left(Y',i';\tau',z'\right)\right]$$
+where the RHS can be evaluated knowing today's state and $i'$. 
+
+We know the first-order condition: $$\frac{1}{Y-i'}=\beta\frac{\partial\hat{V}(Y,i',\tau,z)}{\partial i'}$$
+
+#### Algorithm of EGM
+
+- To proceed, given a value function, on each grid point $(\tau,z,k,i)$,   
+    1. for each $i'$, compute $k'$ and evaluate $\hat{V}(Y,{\color{red}i'},\tau,z)$;
+    2. approximate the derivate $\frac{\partial\hat{V}(Y,i',\tau,z)}{\partial i'}$;
+    3. compute corresponding $Y$ (and thus $k$) today, and thus evaluate the optimal value $$(1-\beta)\left[\log\left(Y-i'\right)+\eta\log\left(g\right)-\frac{\bar{l}^{2}}{2}\right] + \beta \mathbb{E}_{\tau',z'\vert\tau,z}\left[\tilde{V}\left(Y',i';\tau',z'\right)\right]$$ for every $k=\left(\frac{Y}{\left[(1-\tau)(1-\alpha)+\alpha\right]e^{z}}\right)^{1/\alpha}\bar{l}^{\frac{\alpha-1}{\alpha}}$.
+- Update the value function.
+    1. Reinterpolate $\tilde{V}(k,\hat{i},\hat{\tau},\hat{z})$ over fixed $(\hat{i},\hat{\tau},\hat{z})$ and new endogenous grid points $k$. 
+    2. Evaluate the interpolated value function over the base grids and update the relevant range of values over the fixed $(\hat{i},\hat{\tau},\hat{z})$. (Do the same for policy function as well). 
 ### 6.5 Comparison of grids
 
 
 ### 6.6 Switching between policy and value function iteration
+
+I have applied this acceleration method in section 6.4. Now, I turn it off to compare the speeds.
 
 
 ### 6.7 Multigrid

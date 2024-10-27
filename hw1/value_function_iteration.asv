@@ -25,7 +25,7 @@ params.aalpha = 0.33;
 params.bbeta = 0.97;
 params.ddelta = 0.1;
 params.pphi = 0.0;
-params.eeta = 0.0;
+params.eeta = 0.2;
 params.ttauSS = 0.25;
 params.zzSS = 0;
 
@@ -86,10 +86,8 @@ exogenv.indlist = indlist;
 exogenv.transmat = transmat;
 
 % endogenous state grid
-k_grid = linspace(0.1,20, 25);
-inv_grid = linspace(0.1,10, 25);
-% k_grid = linspace(0.7 * k_ss, 1.3 * k_ss, 25);
-% inv_grid = linspace(inv_ss - 0.5 * k_ss, inv_ss + 0.5 * k_ss, 5);
+k_grid = linspace(0.7 * k_ss, 1.3 * k_ss, 25);
+inv_grid = linspace(inv_ss - 0.5 * k_ss, inv_ss + 0.5 * k_ss, 5);
 
 enst_cell = {k_grid, inv_grid};   % endogenous state grids
 st_cell = [{1:exogenv.exnpts}, enst_cell];   % total state grids
@@ -377,7 +375,7 @@ function [Vf, Pf] = solve_VFI_fixed_grid(obj)
         (log(c_ss) + params.eeta * log(g_ss) - (l_ss^2) / 2);
 
     Vf = grid.LinearInterpFunction(obj.grid, Vpts0);
-    x0 = [0.1, 0.5] .* ones(npts, 1);
+    x0 = [inv_ss, l_ss] .* ones(npts, 1);
     
     % set hyperparameters
     maxiter = 1000;
@@ -406,7 +404,8 @@ function [Vf, Pf] = solve_VFI_fixed_grid(obj)
 
             if mod(iter, 10) == 0       % only solve for optimal policy in these steps
                 opts = optimoptions('fmincon', 'Display', 'off');
-                xsol(ii, :) = fmincon(objfunc, xsol(ii, :), [], [], [], [], [0.01, 0.01], [inf, inf], [], opts);
+                % xsol(ii, :) = fmincon(objfunc, xsol(ii, :), [], [], [], [], [0, 0], [inf, inf], [], opts);
+                xsol(ii, :) = fsolve(objfunc, )
             end
 
             % compute government consumption
