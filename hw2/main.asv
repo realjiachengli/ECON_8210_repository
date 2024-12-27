@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 0. Housekeeping
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear all; close all; clc;
+
+% add the Miranda-Fackler toolbox
+addpath('../compecon/CEtools');
+
+% add the Elenev et al. toolbox
+addpath('../');
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rrho = .95;
+ssigma = .007;
+
+% Rouwenhorst method
+nz = 3;
+mu_uncond = -.5 * ssigma^2/(1-rrho^2);
+[transmat, zgrid] = Helpers.rouwen(rrho, mu_uncond, ssigma, 0, nz);
+transmat = transmat';
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Steady state
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+x0 = [1, 0.1]';
+
+xsol = fsolve(@ssres, x0);
+[~, css] = ssres(xsol);
+kss = xsol(1);
+lss = xsol(2);
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Projection with Chebyshev
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% define grids
+nk = 6;
+kmin = 0.5*kss;
+kmax = 2*kss;
+
+knodes = chebnode(nk,kmin,kmax);
+fspace = fundef({'cheb',nk,kmin,kmax});
+T = chebbas(nk,kmin,kmax,knodes,0);
+
+% initial guess
+coefs0 = funfitxy(fspace,knodes,css*ones(nk,1));
+coefs0 = repmat(coefs0,1,nz);
+coefs0 = reshape(coefs0,nk*nz,1);
+
+f2solve = @(xx) projres(xx, T, fspace, knodes, zgrid, transmat);
+opts = optimoptions('fsolve','Display','iter');
+coefsopt = fsolve(f2solve, coefs0, opts);
+
+coefsopt = reshape(coefsopt,nk,nz);
+
+% unpack the solved policy function
+coefz1 = coefsopt(:,1);
+coefz2 = T*coefsopt(:,2);
+coefz3 = T*coefsopt(:,3);
