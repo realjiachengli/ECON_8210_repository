@@ -1,0 +1,70 @@
+Starting Dynare (version 6.2).
+Calling Dynare with arguments: none
+Starting preprocessing of the model file ...
+Found 4 equation(s).
+Evaluating expressions...
+Computing static model derivatives (order 1).
+Normalizing the static model...
+Finding the optimal block decomposition of the static model...
+2 block(s) found:
+  1 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 3 equation(s)
+                                 and 3 feedback variable(s).
+Computing dynamic model derivatives (order 3).
+Normalizing the dynamic model...
+Finding the optimal block decomposition of the dynamic model...
+2 block(s) found:
+  1 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 3 equation(s)
+                                 and 3 feedback variable(s).
+Preprocessing completed.
+Preprocessing time: 0h00m00s.
+
+STEADY-STATE RESULTS:
+
+c 		 1.11614
+l 		 0.946456
+k 		 3.76121
+z 		 0
+
+MODEL SUMMARY
+
+  Number of variables:         4
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           3
+  Number of static variables:  0
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+Variables           e
+e            1.000000
+
+
+
+THEORETICAL MOMENTS BASED ON PRUNED STATE SPACE
+VARIABLE         MEAN  STD. DEV.   VARIANCE
+c              1.1168     0.0350     0.0012
+l              0.9464     0.0038     0.0000
+k              3.7643     0.1349     0.0182
+z              0.0000     0.0224     0.0005
+
+
+
+MATRIX OF CORRELATIONS BASED ON PRUNED STATE SPACE
+Variables         c       l       k       z
+c            1.0000  0.3423  0.9900  0.9548
+l            0.3423  1.0000  0.2063  0.6056
+k            0.9900  0.2063  1.0000  0.9033
+z            0.9548  0.6056  0.9033  1.0000
+
+
+
+COEFFICIENTS OF AUTOCORRELATION BASED ON PRUNED STATE SPACE
+Order          1       2       3       4       5
+c         0.9885  0.9713  0.9496  0.9246  0.8971
+l         0.7945  0.6249  0.4851  0.3703  0.2761
+k         0.9954  0.9835  0.9660  0.9441  0.9190
+z         0.9500  0.9025  0.8574  0.8145  0.7738
+Total computing time : 0h00m01s
+Note: warning(s) encountered in MATLAB/Octave code

@@ -9,6 +9,9 @@ addpath('../compecon/CEtools');
 % add the Elenev et al. toolbox
 addpath('../');
 
+% add dynare
+addpath('/Applications/Dynare/6.2-arm64/matlab');
+
 
 
 
@@ -52,7 +55,7 @@ kmin = 0.01*kss;
 kmax = 2*kss;
 
 knodes = chebnode(nk,kmin,kmax);
-fspace = fundef({'cheb',nk,kmin,kmax});
+fspace = fundef({'spline',nk,kmin,kmax});
 T = chebbas(nk,kmin,kmax,knodes,0);
 
 % initial guess
@@ -144,3 +147,33 @@ end
 % create and print table
 table_data = table(n_values', mean_errors, 'VariableNames', {'n', 'Mean_EE_Error'});
 disp(table_data);
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4. Perturbation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+dynare perturb_dynare.mod
+
+% plot the perturbed consumption policy against that solved by the global
+% method
+
+figure;
+plot_policy_fun('k',kfinegrid','c');
+hold on;
+plot(kfinegrid, cz1, 'DisplayName', 'Global c policy: z1');
+plot(kfinegrid, cz2, 'DisplayName', 'Global c policy: z2');
+plot(kfinegrid, cz3, 'DisplayName', 'Global c policy: z3');
+
+scatter(kss, css, 'ro', 'MarkerFaceColor', 'none', 'DisplayName', 'Steady state');
+title('Consumption Policy');
+xlabel('Capital (k)');
+ylabel('Consumption (c)');
+legend;
+hold off;
+
+
+

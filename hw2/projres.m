@@ -1,4 +1,4 @@
-function res = projres2(coefs, T, fspace, knodes, zgrid, transmat)
+function res = projres(coefs, T, fspace, knodes, zgrid, transmat)
 
     nz = length(zgrid);
     nk = length(knodes);
